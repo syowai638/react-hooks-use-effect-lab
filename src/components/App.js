@@ -3,7 +3,7 @@ import Question from "./Question";
 import quiz from "../data/quiz";
 
 function App() {
-  const [questions, setQuestions] = useState(quiz);
+  const [questions] = useState(quiz);  // Only set the questions, no need for setQuestions
   const [currentQuestionId, setCurrentQuestion] = useState(1);
   const [score, setScore] = useState(0);
   const currentQuestion = questions.find((q) => q.id === currentQuestionId);
@@ -12,10 +12,11 @@ function App() {
     if (currentQuestionId < questions.length) {
       setCurrentQuestion((currentQuestionId) => currentQuestionId + 1);
     } else {
-      setCurrentQuestion(null);
+      setCurrentQuestion(null);  // End the game
     }
+
     if (correct) {
-      setScore((score) => score + 1);
+      setScore((score) => score + 1);  // Increment score if correct
     }
   }
 
@@ -25,7 +26,7 @@ function App() {
         {currentQuestion ? (
           <Question
             question={currentQuestion}
-            onAnswered={handleQuestionAnswered}
+            onAnswered={handleQuestionAnswered}  // Pass the onAnswered prop to Question component
           />
         ) : (
           <>
